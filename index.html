@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Group of Schools & Colleges | Focus to Achieve</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --navy: #0A1F5C;
+    --gold: #F5C842;
+    --white: #FFFFFF;
+    --light: #F4F6FB;
+    --gray: #6B7280;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--white);
+    color: #1a1a2e;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    background: rgba(10,31,92,0.97);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5% 0 3%;
+    height: 68px;
+    border-bottom: 3px solid var(--red);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 44px; height: 44px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 900; color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+  }
+  .nav-logo-text { color: white; font-family: 'Barlow Condensed', sans-serif; }
+  .nav-logo-text strong { display: block; font-size: 1rem; font-weight: 800; letter-spacing: 0.5px; }
+  .nav-logo-text span { font-size: 0.7rem; color: #aab4d0; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; }
+
+  .nav-links { display: flex; gap: 30px; list-style: none; }
+  .nav-links a {
+    color: #c5cde8; text-decoration: none;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--red); color: white;
+    border: none; padding: 10px 22px;
+    border-radius: 4px; font-family: 'Barlow', sans-serif;
+    font-weight: 700; font-size: 0.85rem; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: #a50d24; transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { width: 24px; height: 2px; background: white; transition: 0.3s; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, #16306a 50%, #0d2050 100%);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(200,16,46,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 10% 80%, rgba(245,200,66,0.08) 0%, transparent 40%);
+  }
+
+  .hero-grid-bg {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.04;
+    background-image:
+      linear-gradient(white 1px, transparent 1px),
+      linear-gradient(90deg, white 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 640px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,16,46,0.2);
+    border: 1px solid rgba(200,16,46,0.5);
+    color: #ff8fa0; font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px; margin-bottom: 24px;
+  }
+  .hero-badge::before { content: '●'; color: var(--red); font-size: 0.5rem; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900; color: white; line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--gold); }
+
+  .hero-motto {
+    font-size: 1.1rem; color: #8fa8d8;
+    font-style: italic; margin-bottom: 24px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .hero p {
+    font-size: 1rem; color: #a8b8d8; line-height: 1.8;
+    margin-bottom: 36px; max-width: 500px;
+  }
+
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--red); color: white;
+    padding: 14px 32px; border-radius: 4px;
+    font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 1px; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #a50d24; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,16,46,0.4); }
+
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 14px 32px; border-radius: 4px;
+    font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 1px; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+    border: 2px solid rgba(255,255,255,0.3);
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  .hero-stats {
+    position: absolute; right: 5%; bottom: 50%;
+    transform: translateY(50%);
+    display: flex; flex-direction: column; gap: 20px;
+    animation: fadeUp 1.1s 0.3s ease both;
+    z-index: 1;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border-radius: 12px; padding: 22px 28px;
+    text-align: center;
+  }
+  .stat-card strong { display: block; font-size: 2rem; color: var(--gold); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; }
+  .stat-card span { font-size: 0.75rem; color: #8fa8d8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+  .hero-scroll {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.4); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll::after { content: '↓'; font-size: 1.2rem; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── ENROLLMENT BANNER ── */
+  .enroll-banner {
+    background: var(--red);
+    padding: 18px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .enroll-banner-text {
+    color: white; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .enroll-banner-text span { color: var(--gold); }
+  .pulse-dot { display: inline-block; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; margin-right: 10px; animation: pulse 1.5s infinite; }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245,200,66,0.6); }
+    50% { box-shadow: 0 0 0 8px rgba(245,200,66,0); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 5%; }
+
+  .section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900; color: var(--navy); line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 1rem; color: var(--gray); line-height: 1.8;
+    max-width: 560px; margin-bottom: 48px;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--light);
+    position: relative; overflow: hidden;
+  }
+
+  .about::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200,16,46,0.06), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+
+  .about-features { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: white; padding: 18px 20px;
+    border-radius: 10px; border-left: 4px solid var(--red);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-item:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+
+  .feature-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--red); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+
+  .feature-text strong { display: block; color: var(--navy); font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
+  .feature-text span { color: var(--gray); font-size: 0.85rem; }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: var(--navy);
+    border-radius: 20px; padding: 40px;
+    color: white; position: relative; overflow: hidden;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(200,16,46,0.3), transparent 70%);
+  }
+  .about-card-label { color: var(--gold); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
+  .about-card h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; margin-bottom: 16px; line-height: 1.3; }
+  .about-card p { color: #a8b8d8; line-height: 1.8; font-size: 0.95rem; margin-bottom: 24px; }
+  .about-card-fact { display: flex; gap: 20px; }
+  .fact { text-align: center; }
+  .fact strong { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; color: var(--gold); font-weight: 800; }
+  .fact span { font-size: 0.75rem; color: #8fa8d8; text-transform: uppercase; letter-spacing: 1px; }
+
+  .estd-badge {
+    position: absolute; top: -14px; right: 30px;
+    background: var(--red); color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 800; letter-spacing: 1px;
+    padding: 8px 16px; border-radius: 20px; text-transform: uppercase;
+  }
+
+  /* ── PROGRAMS ── */
+  .programs { background: white; }
+
+  .programs-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+
+  .program-card {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid #e8ecf4;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .program-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(10,31,92,0.12); }
+
+  .program-card-top {
+    background: var(--navy); padding: 32px 28px;
+    position: relative; overflow: hidden;
+  }
+  .program-card-top::before {
+    content: '';
+    position: absolute; bottom: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(200,16,46,0.15);
+    border-radius: 50%;
+  }
+
+  .program-num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: -10px; }
+  .program-name { color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+  .program-tag { display: inline-block; background: var(--red); color: white; font-size: 0.7rem; padding: 4px 10px; border-radius: 12px; font-weight: 700; margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+  .program-card-body { padding: 24px 28px; background: white; }
+  .program-card-body p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+  /* ── FEES ── */
+  .fees {
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  .fees::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(200,16,46,0.2), transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(245,200,66,0.08), transparent 40%);
+  }
+  .fees .section-title { color: white; }
+  .fees .section-label { color: var(--gold); }
+
+  .fees-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px; margin-bottom: 40px;
+  }
+
+  .fee-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 36px 28px;
+    text-align: center; transition: transform 0.2s, background 0.2s;
+  }
+  .fee-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.1); }
+  .fee-card.featured { background: var(--red); border-color: var(--red); }
+  .fee-card.featured .fee-amount { color: white; }
+  .fee-card.featured .fee-label { color: rgba(255,255,255,0.8); }
+  .fee-card.featured .fee-sub { color: rgba(255,255,255,0.7); }
+
+  .fee-icon { font-size: 2.2rem; margin-bottom: 16px; }
+  .fee-label { color: #8fa8d8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 8px; }
+  .fee-amount { color: var(--gold); font-family: 'Barlow Condensed', sans-serif; font-size: 3rem; font-weight: 900; line-height: 1; }
+  .fee-sub { color: #8fa8d8; font-size: 0.85rem; margin-top: 4px; }
+
+  .fees-note {
+    position: relative; z-index: 1;
+    background: rgba(245,200,66,0.1);
+    border: 1px solid rgba(245,200,66,0.3);
+    border-radius: 10px; padding: 16px 24px;
+    color: var(--gold); font-size: 0.9rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  /* ── WHY ── */
+  .why { background: var(--light); }
+
+  .why-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+
+  .why-card {
+    background: white; border-radius: 14px; padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-top: 4px solid transparent;
+  }
+  .why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-top-color: var(--red); }
+
+  .why-icon { font-size: 2.4rem; margin-bottom: 16px; }
+  .why-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .why-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.7; }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: white;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; min-height: 500px;
+  }
+
+  .contact-info {
+    background: var(--red); padding: 80px 5%;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .contact-info .section-label { color: rgba(255,255,255,0.7); }
+  .contact-info .section-title { color: white; }
+  .contact-info .section-sub { color: rgba(255,255,255,0.75); max-width: 100%; }
+
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    color: rgba(255,255,255,0.9); font-size: 0.95rem;
+  }
+  .contact-item-icon {
+    width: 40px; height: 40px; background: rgba(255,255,255,0.15);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-item strong { display: block; font-weight: 700; color: white; margin-bottom: 2px; }
+  .contact-item span { font-size: 0.85rem; color: rgba(255,255,255,0.75); }
+
+  .contact-form-wrap {
+    padding: 80px 5%;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--light);
+  }
+
+  .contact-form-wrap h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--navy); margin-bottom: 28px;
+  }
+
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 16px;
+    border: 2px solid #e0e6f0; border-radius: 8px;
+    font-family: 'Barlow', sans-serif; font-size: 0.95rem;
+    color: var(--navy); background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .submit-btn {
+    width: 100%; background: var(--navy); color: white;
+    border: none; padding: 14px; border-radius: 8px;
+    font-family: 'Barlow', sans-serif; font-weight: 700;
+    font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .submit-btn:hover { background: var(--red); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060e2a;
+    padding: 50px 5% 28px;
+    color: #6b7a9e;
+  }
+
+  .footer-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 40px; flex-wrap: wrap;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 28px;
+  }
+
+  .footer-brand { max-width: 300px; }
+  .footer-brand-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 800; color: white; line-height: 1.2; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .footer-brand-motto { color: var(--gold); font-style: italic; font-family: 'Playfair Display', serif; font-size: 0.95rem; margin-bottom: 14px; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; }
+
+  .footer-links h4 { color: white; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; font-weight: 700; }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a { color: #6b7a9e; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .footer-links a:hover { color: white; }
+
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    font-size: 0.8rem;
+  }
+  .footer-bottom span { color: #3d4d70; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-stats { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 60px 5%; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero { padding: 100px 5% 60px; }
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    position: fixed; top: 68px; left: 0; width: 100%;
+    background: var(--navy); border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 5%; z-index: 999;
+    display: none; flex-direction: column; gap: 16px;
+    transform: translateY(-100%); transition: transform 0.3s ease, display 0s 0.3s;
+  }
+  .mobile-nav.open { display: flex; transform: translateY(0); transition: transform 0.3s ease; }
+  .mobile-nav a { color: white; text-decoration: none; font-weight: 600; font-size: 1rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">FG</div>
+    <div class="nav-logo-text">
+      <strong>Focus Group</strong>
+      <span>Schools & Colleges</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#fees">Fees</a></li>
+    <li><a href="#why-us">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Enroll Now</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#programs" onclick="closeMenu()">Programs</a>
+  <a href="#fees" onclick="closeMenu()">Fees</a>
+  <a href="#why-us" onclick="closeMenu()">Why Us</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">2026 Enrollment Now Open</div>
+    <h1>Focus Group of<br><span>Schools & Colleges</span></h1>
+    <p class="hero-motto">"Focus to Achieve"</p>
+    <p>A Christ-centred learning community in Rusape, Zimbabwe — nurturing academic excellence, talent, and character in every student from Form 1 to Form 3.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Enroll Today</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <strong>Est.</strong>
+      <span>2025</span>
+    </div>
+    <div class="stat-card">
+      <strong>F1–3</strong>
+      <span>Forms Available</span>
+    </div>
+    <div class="stat-card">
+      <strong>$40</strong>
+      <span>Per Month</span>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ENROLLMENT BANNER -->
+<div class="enroll-banner">
+  <div class="enroll-banner-text">
+    <span class="pulse-dot"></span>
+    <span>2026 Enrollment in Progress</span> — <span>Forms 1 to 3</span>
+  </div>
+  <a href="#contact" class="btn-primary" style="padding:10px 24px; font-size:0.8rem;">Register Now</a>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <p class="section-label">Who We Are</p>
+      <h2 class="section-title">Building Futures<br>in Rusape</h2>
+      <p class="section-sub">Located at Tsikada Homestead, Nyahunguwo Village, Tandi, Rusape — Focus Group of Schools & Colleges is a dynamic private institution committed to raising academically strong, morally upright, and skilled young Zimbabweans.</p>
+      <div class="about-features">
+        <div class="feature-item">
+          <div class="feature-icon">📖</div>
+          <div class="feature-text">
+            <strong>Innovative & Engaging Education</strong>
+            <span>Modern teaching methods that inspire curiosity and critical thinking.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✝️</div>
+          <div class="feature-text">
+            <strong>Christian Environment</strong>
+            <span>Rooted in faith-based values, building character alongside academics.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-text">
+            <strong>Guidance & Counseling</strong>
+            <span>Dedicated support for every student's personal and academic journey.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚽</div>
+          <div class="feature-text">
+            <strong>Extra-Curricular Activities</strong>
+            <span>Sports, clubs, and talent development beyond the classroom.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:0.2s">
+      <div class="about-card" style="position:relative">
+        <div class="estd-badge">Est. 2025</div>
+        <p class="about-card-label">Our Mission</p>
+        <h3>Excellence in Education, Grounded in Faith</h3>
+        <p>We are dedicated to providing quality, accessible secondary education that empowers students to realize their full potential — academically, creatively, and spiritually.</p>
+        <div class="about-card-fact">
+          <div class="fact"><strong>100%</strong><span>Committed Staff</span></div>
+          <div class="fact"><strong>F1–3</strong><span>Forms Offered</span></div>
+          <div class="fact"><strong>Rusape</strong><span>Location</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div style="text-align:center; margin-bottom:48px;" class="reveal">
+    <p class="section-label">Academic Programs</p>
+    <h2 class="section-title">Secondary School Forms</h2>
+    <p class="section-sub" style="margin: 0 auto;">We currently offer secondary education from Form 1 through Form 3, with enrollment open for the 2026 academic year.</p>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card reveal">
+      <div class="program-card-top">
+        <div class="program-num">01</div>
+        <div class="program-name">Form One</div>
+        <span class="program-tag">Open for 2026</span>
+      </div>
+      <div class="program-card-body">
+        <p>The entry point into secondary education at Focus Group. Students build foundational skills across core subjects in a nurturing, structured environment designed to ease the transition from primary school.</p>
+      </div>
+    </div>
+    <div class="program-card reveal" style="transition-delay:0.15s">
+      <div class="program-card-top">
+        <div class="program-num">02</div>
+        <div class="program-name">Form Two</div>
+        <span class="program-tag">Open for 2026</span>
+      </div>
+      <div class="program-card-body">
+        <p>Building on Form One fundamentals, students deepen their subject knowledge. Talent identification, counseling, and extra-curricular activities play an increasing role in student development.</p>
+      </div>
+    </div>
+    <div class="program-card reveal" style="transition-delay:0.3s">
+      <div class="program-card-top">
+        <div class="program-num">03</div>
+        <div class="program-name">Form Three</div>
+        <span class="program-tag">Open for 2026</span>
+      </div>
+      <div class="program-card-body">
+        <p>Form 3 prepares students for the critical O-Level examinations ahead. With highly qualified tutors and our Technical Skills Hub, students are set up for examination success and beyond.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEES -->
+<section class="fees" id="fees">
+  <div style="margin-bottom: 48px;" class="reveal">
+    <p class="section-label">School Fees</p>
+    <h2 class="section-title">Transparent & Affordable</h2>
+    <p class="section-sub" style="color:#8fa8d8;">Quality education at accessible rates. We believe every child deserves the opportunity to achieve.</p>
+  </div>
+  <div class="fees-grid reveal">
+    <div class="fee-card">
+      <div class="fee-icon">📋</div>
+      <div class="fee-label">Registration Fee</div>
+      <div class="fee-amount">$20</div>
+      <div class="fee-sub">One-time upon enrollment</div>
+    </div>
+    <div class="fee-card featured">
+      <div class="fee-icon">📅</div>
+      <div class="fee-label">Monthly Tuition</div>
+      <div class="fee-amount">$40</div>
+      <div class="fee-sub">Per month, per student</div>
+    </div>
+    <div class="fee-card">
+      <div class="fee-icon">🗓️</div>
+      <div class="fee-label">Per Term</div>
+      <div class="fee-amount">$120</div>
+      <div class="fee-sub">Full term payment option</div>
+    </div>
+  </div>
+  <div class="fees-note reveal" style="transition-delay:0.2s">
+    <span>💡</span>
+    <span>Fees can be paid monthly or per term. Please contact us to discuss payment arrangements or for any queries regarding school fees.</span>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why-us">
+  <div style="text-align:center; margin-bottom:48px;" class="reveal">
+    <p class="section-label">Why Choose Us</p>
+    <h2 class="section-title">What Sets Us Apart</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon">🎓</div>
+      <h3>Highly Qualified Tutors</h3>
+      <p>Our compassionate and skilled educators bring passion and expertise to every lesson, ensuring each student receives quality instruction.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.1s">
+      <div class="why-icon">✝️</div>
+      <h3>Christian Environment</h3>
+      <p>We nurture not just the mind but the spirit. Our faith-based environment promotes integrity, respect, and strong moral values.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.2s">
+      <div class="why-icon">🌟</div>
+      <h3>Talent Identification & Nurturing</h3>
+      <p>Every student has unique gifts. We actively identify and develop individual talents through structured programs and mentorship.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.3s">
+      <div class="why-icon">🔧</div>
+      <h3>Technical Skills Hub</h3>
+      <p>Preparing students for the modern world with practical technical skills alongside their academic curriculum.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.4s">
+      <div class="why-icon">🧭</div>
+      <h3>Guidance & Counseling</h3>
+      <p>Dedicated counseling services support students through academic challenges and personal growth throughout their school journey.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.5s">
+      <div class="why-icon">🏆</div>
+      <h3>Extra-Curricular Activities</h3>
+      <p>A well-rounded education includes sport, arts, and clubs — building teamwork, leadership, and a love for life beyond books.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact" id="contact">
+  <div class="contact-info reveal">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title" style="font-size:2rem;">Visit or Call Us Today</h2>
+    <p class="section-sub" style="margin-bottom:36px;">We'd love to hear from you. Reach out to learn more about enrollment or to arrange a school visit.</p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div>
+          <strong>Phone Numbers</strong>
+          <span>+263 775 023 043<br>+263 715 384 611</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <strong>Physical Address</strong>
+          <span>Tsikada Homestead, Nyahunguwo Village<br>Tandi, Rusape, Zimbabwe</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🕐</div>
+        <div>
+          <strong>Office Hours</strong>
+          <span>Monday – Friday: 7:30am – 4:30pm<br>Saturday: 8:00am – 12:00pm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form-wrap reveal" style="transition-delay:0.2s">
+    <h3>Enrollment Inquiry</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Parent / Guardian Name</label>
+        <input type="text" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+263 ...">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Student's Full Name</label>
+      <input type="text" placeholder="Student name">
+    </div>
+    <div class="form-group">
+      <label>Form Applying For</label>
+      <select>
+        <option value="">Select form...</option>
+        <option>Form 1</option>
+        <option>Form 2</option>
+        <option>Form 3</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Message or Questions</label>
+      <textarea placeholder="Any additional information or questions..."></textarea>
+    </div>
+    <button class="submit-btn" onclick="handleSubmit()">Submit Enrollment Inquiry</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-brand-name">Focus Group of<br>Schools & Colleges</div>
+      <div class="footer-brand-motto">"Focus to Achieve"</div>
+      <p>A Christian secondary school in Rusape, Zimbabwe, dedicated to academic excellence and holistic student development since 2025.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#fees">School Fees</a></li>
+        <li><a href="#why-us">Why Choose Us</a></li>
+        <li><a href="#contact">Contact & Enroll</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+263775023043">+263 775 023 043</a></li>
+        <li><a href="tel:+263715384611">+263 715 384 611</a></li>
+        <li><a href="#">Tsikada Homestead, Rusape</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Focus Group of Schools & Colleges. All rights reserved.</span>
+    <span>Tsikada Homestead, Nyahunguwo Village, Tandi, Rusape, Zimbabwe</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Mobile nav
+  function toggleMenu() {
+    const nav = document.getElementById('mobileNav');
+    nav.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+
+  // Form submit
+  function handleSubmit() {
+    alert('Thank you for your inquiry! The Focus Group team will contact you shortly.\n\nFor immediate assistance, call:\n+263 775 023 043\n+263 715 384 611');
+  }
+
+  // Smooth highlight nav on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
